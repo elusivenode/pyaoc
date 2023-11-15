@@ -34,8 +34,5 @@ for s in slopes:
     trees_encountered_slope = trees_encountered_on_slope(s[0], s[1])
     trees_encountered += trees_encountered_slope
     trees_encountered_x *= trees_encountered_slope
-    print(trees_encountered_slope)
-    print(trees_encountered)
-    print(trees_encountered_x)
 
 print(f'Answer to part 2: {trees_encountered_x}')

@@ -23,6 +23,17 @@ def get_max_seat_id(d):
             m = d[s]['seat_id']
     return m
 
+def find_my_seat(d):
+    prior_seat_occupied = False
+    for s in d:
+        if d[s] == 1:
+            current_seat_occupied = True
+        else:
+            current_seat_occupied = False
+        if not current_seat_occupied and prior_seat_occupied:
+            return s
+        prior_seat_occupied = current_seat_occupied
+
 with open('/Users/hamish.macdonald/Dev/pyaoc/2020/puzzle_input/day5/input_5.txt', 'r') as input_f:
     input_lines = input_f.readlines()
 
@@ -40,3 +51,14 @@ for bp in boarding_passes:
     bp_seat_nos[bp]['seat_id'] = row * 8 + col
 
 print(f'The answer to part 1 is {get_max_seat_id(bp_seat_nos)}')
+
+bp_possible_seat_ids = {}
+for r in range(0,128):
+    for c in range(0,8):
+        bp_possible_seat_ids[r * 8 + c] = 0
+
+for bp in bp_seat_nos:
+    bp_possible_seat_ids[bp_seat_nos[bp]['seat_id']] = 1
+
+
+print(f'The answer to part 2 is {find_my_seat(bp_possible_seat_ids)}')
